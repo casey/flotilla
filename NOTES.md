@@ -7,7 +7,7 @@ Graph
 * GET /A   -> get total outgoing edge weight from A
 * GET /    -> get total weight of all edges
 
-This guy will probably need a background task queue. It may seem wierd, but I need it for a service which allows users to edit documents, where it would be nice to track the heritage of documents, like which documents they were forked from. This seems like the minimum needed to support such functionality.
+This guy will probably need a background task queue. It may seem weird, but I need it for a service which allows users to edit documents, where it would be nice to track the heritage of documents, like which documents they were forked from. This seems like the minimum needed to support such functionality.
 
 Counter
 -------
