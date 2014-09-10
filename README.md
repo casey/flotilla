@@ -9,10 +9,10 @@ The intention is that these random, disparate pieces can be assembled into somet
 Cast of Characters
 ------------------
 
-* (WORM - write-once key value storage)[https://github.com/casey/worm]
-* (Timestamp - timestamp service)[https://github.com/casey/timestamp]
-* (Static - static file serving)[https://github.com/casey/static]
-* (Okay - always OK)[https://github.com/casey/ok]
+* [WORM - write-once key value storage](github.com/casey/worm)
+* [Timestamp - timestamp service](github.com/casey/timestamp)
+* [Static - static file serving](github.com/casey/static)
+* [Okay - always OK](github.com/casey/ok)
 
 The test instances are all running on the GAE free tier, so feel free to try to hose them. Be aware that they might disappear or lose all their data at any time.
 
