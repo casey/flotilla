@@ -13,6 +13,7 @@ Cast of Characters
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
 * [Static](http://github.com/casey/static) - static file serving
 * [Okay](http://github.com/casey/ok) - always copacetic
+* [Publish](http://github.com/casey/publish) - permissive content addressable storage
 
 The test instances are all running on the GAE free tier, so feel free to try to hose them. Be aware that they might disappear or lose all their data at any time.
 
@@ -33,7 +34,6 @@ They all:
 Yet to be Written
 -----------------
 
-* Publish - Content-addressable storage service
 * Ephemera - Like WORM but allows overwriting, possibly with versioning
 * Graph - A directed graph builder thingy
 * Counter - A counter service. Think for hit counting, but might actually be a subset of Graph
