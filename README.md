@@ -13,7 +13,7 @@ Cast of Characters
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
 * [Static](http://github.com/casey/static) - static file serving
 * [Okay](http://github.com/casey/ok) - always copacetic
-* [Publish](http://github.com/casey/publish) - permissive content addressable storage
+* [Share](http://github.com/casey/share) - data sharing
 
 The test instances are all running on the GAE free tier, so feel free to try to hose them. Be aware that they might disappear or lose all their data at any time.
 
