@@ -34,7 +34,6 @@ They all:
 Yet to be Written
 -----------------
 
-* Ephemera - Like WORM but allows overwriting, possibly with versioning
 * Graph - A directed graph builder thingy
 * Counter - A counter service. Think for hit counting, but might actually be a subset of Graph
 * Enumerate - A service for assigning small numbers from a sequence. Could be used to assign small unique numbers to user accounts or pieces of published content
