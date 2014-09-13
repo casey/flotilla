@@ -30,7 +30,7 @@ They all:
 * Should be abuse resistant
 * Are released under a simple all-permissive license
 
-The test instances are running on the GAE free tier, so feel free to try to break them. And let me know if you are able to! Be aware that they might disappear or lose all their data at any time.
+Feel free to try to break the test instances, and let me know if you succeed! Be aware that they might disappear or lose all their data at any time.
 
 
 Yet to be Written
