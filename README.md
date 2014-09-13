@@ -5,7 +5,7 @@ A collection of itty-bitty services.
 
 The intention is that these random, disparate pieces can be assembled into something cool. (And maybe once I'm done writing nano services I'll actually get to that something!) The advantage of writing them independently is that they become much easier to reason about and be audited for resource usage, correctness, and security.
 
-There is also some shared code that I factored out after it appeared in a few services. It's not really a library, as such, and breaking changes may be introduced without warning.
+There is also some shared code that I factored out after it appeared in a few services. It's not really a library, as such, and is almost certainly not fit for direct consumption.
 
 
 Cast of Characters
@@ -33,14 +33,31 @@ They all:
 Feel free to try to break the test instances, and let me know if you succeed! Be aware that they might disappear or lose all their data at any time.
 
 
-Yet to be Written
------------------
-
-* Graph - A directed graph builder thingy
-* Enumerate - A service for allocating sequential small numbers
-
-
 Halp!
 -----
 
 I am sure that I did everything wrong. Suggestions, issues, and pull requests are all welcome. Please keep in mind that following conventions is not a priority for me.
+
+To Do
+-----
+
+There are a few services that I have vague ideas for but haven't started writing:
+
+### Graph - A directed graph builder
+
+* PUT /A/B -> increment the A -> B directed edge
+* PUT /A/A -> increment A->A self-edge weight
+* GET /A/B -> get edge weight, last update time (eventually consistent)
+* GET /A   -> get total outgoing edge weight from A
+* GET /    -> get total weight of all edges
+
+This guy will probably need a background task queue to avoid datastore write contention. It might seem weird like a weird service, but I need something to track document revision history, and this seems like the minimum needed to support that.
+
+
+### Enumerate - A service for assigning small sequential numbers to things
+
+* GET /KEY/VALUE -> get number for VALUE in the KEY namespace
+* GET /KEY/NUMBER -> get value for NUMBER in the KEY namespace
+* PUT /KEY/VALUE -> establishes number for VALUE in the KEY namespace, as small as possible, start at 0
+
+Just used to establish small, nice to look at integers for things like users, published pieces of content, etc. Think vimeo video ids.
