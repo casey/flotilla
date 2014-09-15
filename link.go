@@ -31,11 +31,14 @@ func Link(path string) string {
   return filepath.Join(hash(path)[:16], path)
 }
 
-func Links(paths ...string) []string {
-  links := make([]string, len(paths))
+func Links(globs ...string) []string {
+  links := make([]string, 0)
 
-  for i, path := range paths {
-    links[i] = Link(path)
+  for _, glob := range globs {
+    paths, _ := filepath.Glob(glob)
+    for _, path := range(paths) {
+      links = append(links, Link(path))
+    }
   }
   
   return links
