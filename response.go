@@ -1,7 +1,9 @@
 package flotilla
 
 import "fmt"
+import "appengine"
 import "net/http"
+import "runtime/debug"
 
 type response_t struct {
   why      string
@@ -10,7 +12,16 @@ type response_t struct {
   mimetype string
 }
 
+var debugEnabled = false
+
+func Debug(enabled bool) {
+  debugEnabled = enabled
+}
+
 func (this response_t) finish() {
+  if appengine.IsDevAppServer() && debugEnabled {
+    debug.PrintStack()
+  }
   panic(this)
 }
 
