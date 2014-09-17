@@ -15,6 +15,7 @@ Cast of Characters
 * [WORM](http://github.com/casey/worm) - write-once key value storage
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
 * [Static](http://github.com/casey/static) - static file serving
+* [ID](http://github.com/casey/id) - assign numbers to keys
 * [Okay](http://github.com/casey/ok) - always copacetic
 
 They all:
@@ -52,12 +53,3 @@ There are a few services that I have vague ideas for but haven't started writing
 * GET /    -> get total weight of all edges
 
 This guy will probably need a background task queue to avoid datastore write contention. It might seem weird like a weird service, but I need something to track document revision history, and this seems like the minimum needed to support that.
-
-
-### Enumerate - A service for assigning small sequential numbers to things
-
-* GET /KEY/VALUE -> get number for VALUE in the KEY namespace
-* GET /KEY/NUMBER -> get value for NUMBER in the KEY namespace
-* PUT /KEY/VALUE -> establishes number for VALUE in the KEY namespace, as small as possible, start at 0
-
-Just used to establish small, nice to look at integers for things like users, published pieces of content, etc. Think vimeo video ids.
