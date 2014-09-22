@@ -15,7 +15,7 @@ Cast of Characters
 * [WORM](http://github.com/casey/worm) - write-once key value storage
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
 * [Static](http://github.com/casey/static) - static file serving
-* [ID](http://github.com/casey/id) - assign numbers to keys
+* [Number](http://github.com/casey/number) - assign numbers to names
 * [Graph](http://github.com/casey/graph) - build directed graphs
 * [Okay](http://github.com/casey/ok) - always copacetic
 
