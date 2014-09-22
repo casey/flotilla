@@ -16,7 +16,7 @@ Cast of Characters
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
 * [Static](http://github.com/casey/static) - static file serving
 * [Number](http://github.com/casey/number) - assign numbers to names
-* [Graph](http://github.com/casey/graph) - build directed graphs
+* [Edge](http://github.com/casey/edge) - build weighted directed graphs
 * [Okay](http://github.com/casey/ok) - always copacetic
 
 
