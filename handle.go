@@ -31,5 +31,5 @@ func (this *Handler) On(method string, f func(*http.Request)) *Handler {
 
 func (this *Handler) Get    (f func(*http.Request)) *Handler { return this.On("GET",     f) }
 func (this *Handler) Put    (f func(*http.Request)) *Handler { return this.On("PUT",     f) }
+func (this *Handler) Post   (f func(*http.Request)) *Handler { return this.On("POST",    f) }
 func (this *Handler) Options(f func(*http.Request)) *Handler { return this.On("OPTIONS", f) }
-
