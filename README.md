@@ -14,10 +14,9 @@ Cast of Characters
 * [Share](http://github.com/casey/share) - permissive content addressed storage
 * [WORM](http://github.com/casey/worm) - write-once key value storage
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
-* [Static](http://github.com/casey/static) - static file serving
 * [Number](http://github.com/casey/number) - assign numbers to names
 * [Edge](http://github.com/casey/edge) - build weighted directed graphs
-* [Okay](http://github.com/casey/ok) - always copacetic
+* [Shipyard](http://github.com/casey/shipyard) - a template for new flotilla services
 
 
 Characteristics
