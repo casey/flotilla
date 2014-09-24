@@ -33,6 +33,10 @@ func Body(status status_t, body, mimetype string) {
   response_t{"Body", status, body, mimetype}.finish()
 }
 
+func Text(status status_t, body string) {
+  response_t{"Body", status, body, "text/plain; charset=utf-8"}.finish()
+}
+
 func Ensure(condition bool, status status_t) {
   if !condition {
     response_t{"Ensure", status, "", ""}.finish()
