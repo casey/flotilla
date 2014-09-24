@@ -9,8 +9,13 @@ func Handle(pattern string) *Handler {
   http.HandleFunc(pattern, func (w http.ResponseWriter, r *http.Request) {
     defer Respond(w, r)
     f, ok := this.methods[r.Method]
-    Ensure(ok, http.StatusMethodNotAllowed)
-    f(r)
+    if ok {
+      f(r)
+    } else if this.defaultHandler != nil {
+      this.defaultHandler(r)
+    } else {
+      Status(http.StatusMethodNotAllowed)
+    }
   })
 
   return this
@@ -18,6 +23,7 @@ func Handle(pattern string) *Handler {
 
 type Handler struct {
   methods map[string]func(r *http.Request)
+  defaultHandler func(r *http.Request)
 };
 
 func (this *Handler) On(method string, f func(*http.Request)) *Handler {
@@ -26,6 +32,14 @@ func (this *Handler) On(method string, f func(*http.Request)) *Handler {
     panic("Handler: duplicate method handler: " + method)
   }
   this.methods[method] = f
+  return this
+}
+
+func (this *Handler) Default(f func(*http.Request)) *Handler {
+  if this.defaultHandler != nil {
+    panic("Handler: duplicate default handler")
+  }
+  this.defaultHandler = f
   return this
 }
 
