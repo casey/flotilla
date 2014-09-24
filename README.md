@@ -1,7 +1,7 @@
 flotilla
 ========
 
-A collection of itty-bitty services.
+Itty-bitty services
 
 The intention is that these random, disparate pieces can be assembled into something cool. (And maybe once I'm done writing nano services I'll actually get to that something!) The advantage of writing them independently is that they become much easier to reason about and be audited for resource usage, correctness, and security.
 
