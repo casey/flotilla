@@ -25,26 +25,26 @@ func (this response_t) finish() {
   panic(this)
 }
 
-func Status(status status_t) {
-  response_t{"Status", status, "", ""}.finish()
+func Status(status int) {
+  response_t{"Status", status_t(status), "", ""}.finish()
 }
 
-func Body(status status_t, body, mimetype string) {
-  response_t{"Body", status, body, mimetype}.finish()
+func Body(status int, body, mimetype string) {
+  response_t{"Body", status_t(status), body, mimetype}.finish()
 }
 
-func Text(status status_t, body string) {
-  response_t{"Body", status, body, "text/plain; charset=utf-8"}.finish()
+func Text(status int, body string) {
+  response_t{"Text", status_t(status), body, "text/plain; charset=utf-8"}.finish()
 }
 
-func Ensure(condition bool, status status_t) {
+func Ensure(condition bool, status int) {
   if !condition {
-    response_t{"Ensure", status, "", ""}.finish()
+    response_t{"Ensure", status_t(status), "", ""}.finish()
   }
 }
 
 func OK(r *http.Request) {
-  Status(http.StatusOK)
+  response_t{"OK", http.StatusOK, "", ""}.finish()
 }
 
 func Check(e error) {
