@@ -43,6 +43,10 @@ func Ensure(condition bool, status status_t) {
   }
 }
 
+func OK(r *http.Request) {
+  Status(http.StatusOK)
+}
+
 func Check(e error) {
   if e != nil {
     response_t{"Check: " + e.Error(), http.StatusInternalServerError, "", ""}.finish()
