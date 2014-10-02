@@ -37,6 +37,10 @@ func Text(status int, body string) {
   response_t{"Text", status_t(status), body, "text/plain; charset=utf-8"}.finish()
 }
 
+func HTML(status int, body string) {
+  response_t{"HTML", status_t(status), body, "text/html; charset=utf-8"}.finish()
+}
+
 func Ensure(condition bool, status int) {
   if !condition {
     response_t{"Ensure", status_t(status), "", ""}.finish()
