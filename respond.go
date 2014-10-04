@@ -33,6 +33,6 @@ func Respond(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Warranty", `"AS IS" WITH NO WARRANTY OF ANY KIND EXPRESS OR IMPLIED.`)
   w.Header().Set("Access-Control-Max-Age", "1728000")
   w.Header().Set("Content-Type", response.mimetype)
-  w.WriteHeader(response.status.number())
+  w.WriteHeader(response.status.Number())
   w.Write([]byte(response.body))
 }

@@ -7,7 +7,7 @@ import "runtime/debug"
 
 type response_t struct {
   why      string
-  status   status_t
+  status   StatusCode
   body     string
   mimetype string
 }
@@ -25,25 +25,25 @@ func (this response_t) finish() {
   panic(this)
 }
 
-func Status(status int) {
-  response_t{"Status", status_t(status), "", ""}.finish()
+func Status(status StatusCode) {
+  response_t{"Status", status, "", ""}.finish()
 }
 
-func Body(status int, body, mimetype string) {
-  response_t{"Body", status_t(status), body, mimetype}.finish()
+func Body(status StatusCode, body, mimetype string) {
+  response_t{"Body", status, body, mimetype}.finish()
 }
 
-func Text(status int, body string) {
-  response_t{"Text", status_t(status), body, "text/plain; charset=utf-8"}.finish()
+func Text(status StatusCode, body string) {
+  response_t{"Text", status, body, "text/plain; charset=utf-8"}.finish()
 }
 
-func HTML(status int, body string) {
-  response_t{"HTML", status_t(status), body, "text/html; charset=utf-8"}.finish()
+func HTML(status StatusCode, body string) {
+  response_t{"HTML", status, body, "text/html; charset=utf-8"}.finish()
 }
 
-func Ensure(condition bool, status int) {
+func Ensure(condition bool, status StatusCode) {
   if !condition {
-    response_t{"Ensure", status_t(status), "", ""}.finish()
+    response_t{"Ensure", status, "", ""}.finish()
   }
 }
 
@@ -67,10 +67,10 @@ func (this *response_t) repair() {
   }
 
   if this.body == "" && this.mimetype == "" {
-    if this.status.bodyForbidden() {
+    if this.status.BodyForbidden() {
       this.body = "\n"
     } else {
-      this.body = fmt.Sprintf("%v %v\n", this.status.number(), this.status.text())
+      this.body = fmt.Sprintf("%v %v\n", this.status.Number(), this.status.Text())
     }
   }
 
