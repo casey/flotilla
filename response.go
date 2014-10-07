@@ -1,6 +1,7 @@
 package flotilla
 
 import "fmt"
+import "errors"
 import "appengine"
 import "net/http"
 import "runtime/debug"
@@ -23,6 +24,11 @@ func (this response_t) finish() {
     debug.PrintStack()
   }
   panic(this)
+}
+
+func Die(text string) bool {
+  panic errors.New(text)
+  return true
 }
 
 func Status(status StatusCode) {
