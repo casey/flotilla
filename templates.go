@@ -3,6 +3,8 @@ package flotilla
 import "appengine"
 import "sync"
 import "html/template"
+import "io/ioutil"
+import "path/filepath"
 
 var templatecache = make(map[string]*template.Template)
 var templatemutex sync.Mutex
@@ -20,7 +22,13 @@ func ParseHTMLTemplate(path string) *template.Template {
     return template
   }
 
-  t := template.Must(template.New("").Funcs(funcmap).ParseFiles(path))
+  bytes, e := ioutil.ReadFile(path)
+  
+  if e != nil {
+    panic(e)
+  }
+
+  t := template.Must(template.New(filepath.Base(path)).Funcs(funcmap).Parse(string(bytes)))
 
   if !appengine.IsDevAppServer() {
     templatecache[path] = t

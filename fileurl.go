@@ -41,7 +41,7 @@ func FileURL(path string) template.URL {
   return template.URL(filepath.Join(hash(path)[:16], path))
 }
 
-func FileURLs(globs ...string) []template.URL {
+func FileURLs(globs []string) []template.URL {
   links := make([]template.URL, 0)
 
   for _, glob := range globs {
