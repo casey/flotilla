@@ -1,15 +1,13 @@
 package flotilla
 
-import "appengine"
-import "appengine/urlfetch"
-import "strings"
+import "sync"
 import "io/ioutil"
 import "net/http"
 
 type Result struct {
   Response *http.Response
   Status   StatusCode
-  Bytes    byte[]
+  Bytes    []byte
   OK       bool
   error    error
   string   string
@@ -39,55 +37,54 @@ func (this *Result) Error() error {
   return nil
 }
 
-type RequestGroup_t struct {
-  WaitGroup syn.WaitGroup
-  Mutex     syn.Mutex
+type requestGroup_t struct {
+  WaitGroup sync.WaitGroup
+  Mutex     sync.Mutex
   Client    *http.Client
   callbacks []func()
 }
 
-func RequestGroup(client *http.Client) (this RequestGroup_t) {
+func RequestGroup(client *http.Client) (this requestGroup_t) {
   this.Client = client
   return
 }
 
-func (this *RequestGroup_t) Do(request http.Request, callback func(Result)) *RequestGroup_t {
+func (this *requestGroup_t) Do(request *http.Request, callback func(Result)) *requestGroup_t {
   this.Mutex.Lock()
   defer this.Mutex.Unlock()
-
-  this.Client == nil && Die("RequestGroup_t.Do: " + name + ": this.Client nil")
   
   this.WaitGroup.Add(1)
   var result Result
-  callbacks = append(callbacks, func() { callback(result) })
+  this.callbacks = append(this.callbacks, func() { callback(result) })
   
   go func() {
     defer this.WaitGroup.Done()
-    defer response.Body.Close()
-
     response, e := this.Client.Do(request)
-    result.response = response
+    defer response.Body.Close()
+    result.Response = response
     result.error = e
 
     if e != nil {
       return
     }
 
-    result.status = StatusCode(response.StatusCode)
-    body, e := ioutil.ReadAll(response.Body)
-    result.body = body
+    result.Status = StatusCode(response.StatusCode)
+    bytes, e := ioutil.ReadAll(response.Body)
+    result.Bytes = bytes
     result.error = e
 
-    result.OK = result.error == nil && response.StatusCode.Successful()
+    result.OK = result.error == nil && result.Status.Successful()
   }()
+
+  return this
 }
 
-func (this *RequestGroup_t) Wait() *RequestGroup_t {
+func (this *requestGroup_t) Wait() *requestGroup_t {
   this.WaitGroup.Wait()
-  for callback, i := range(this.callbacks) {
+  for _, callback := range(this.callbacks) {
     callback()
   }
-  this.callbacsk = nil
+  this.callbacks = nil
   return this
 }
 

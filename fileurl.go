@@ -5,10 +5,22 @@ import "crypto/sha256"
 import "encoding/hex"
 import "io/ioutil"
 import "path/filepath"
+import "sync"
+import "html/template"
 
 var hashcache = make(map[string]string)
+var hashmutex sync.Mutex
 
 func hash(path string) string {
+  hashmutex.Lock()
+  defer hashmutex.Unlock()
+
+  if !appengine.IsDevAppServer() {
+    if cached, ok := hashcache[path]; ok {
+      return cached
+    }
+  }
+
   b, e := ioutil.ReadFile(path)
   
   if e != nil {
@@ -20,24 +32,22 @@ func hash(path string) string {
   sum := sha.Sum(nil)
   hash := hex.EncodeToString(sum)
 
-  if !appengine.IsDevAppServer() {
-    hashcache[path] = hash
-  }
+  hashcache[path] = hash
 
   return hash
 }
 
-func Link(path string) string {
-  return filepath.Join(hash(path)[:16], path)
+func FileURL(path string) template.URL {
+  return template.URL(filepath.Join(hash(path)[:16], path))
 }
 
-func Links(globs ...string) []string {
-  links := make([]string, 0)
+func FileURLs(globs ...string) []template.URL {
+  links := make([]template.URL, 0)
 
   for _, glob := range globs {
     paths, _ := filepath.Glob(glob)
     for _, path := range(paths) {
-      links = append(links, Link(path))
+      links = append(links, FileURL(path))
     }
   }
   

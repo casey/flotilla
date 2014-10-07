@@ -1,5 +1,6 @@
 package flotilla
 
+import "bytes"
 import "fmt"
 import "errors"
 import "appengine"
@@ -27,7 +28,7 @@ func (this response_t) finish() {
 }
 
 func Die(text string) bool {
-  panic errors.New(text)
+  panic(errors.New(text))
   return true
 }
 
@@ -51,6 +52,19 @@ func Ensure(condition bool, status StatusCode) {
   if !condition {
     response_t{"Ensure", status, "", ""}.finish()
   }
+}
+
+func Template(status StatusCode, path string, data interface{}) {
+  template := ParseHTMLTemplate(path)
+
+  var b bytes.Buffer 
+  e := template.Execute(&b, data)
+
+  if e != nil {
+    Text(StatusInternalServerError, e.Error())
+  }
+
+  HTML(status, b.String())
 }
 
 func OK(r *http.Request) {
