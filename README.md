@@ -16,7 +16,7 @@ Cast of Characters
 * [Timestamp](http://github.com/casey/timestamp) - timestamping
 * [Number](http://github.com/casey/number) - assign numbers to names
 * [Edge](http://github.com/casey/edge) - build weighted directed graphs
-* [Shipyard](http://github.com/casey/shipyard) - a template for new flotilla services
+* [Shipyard](http://github.com/casey/shipyard) - a skeleton for flotilla apps and services
 
 
 Characteristics
