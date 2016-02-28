@@ -17,6 +17,7 @@ Cast of Characters
 * [Number](http://github.com/casey/number) - assign numbers to names
 * [Edge](http://github.com/casey/edge) - build weighted directed graphs
 * [Shipyard](http://github.com/casey/shipyard) - a skeleton for flotilla apps and services
+* [Dedub](http://github.com/casey/dedub) - get rid of those pesky dubdubdubs
 
 
 Characteristics
