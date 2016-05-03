@@ -20,18 +20,6 @@ func Respond(w http.ResponseWriter, r *http.Request) {
 
 	c.Infof("handler: why: %v", response.why)
 
-	if value := r.Header.Get("Access-Control-Request-Headers"); value != "" {
-		w.Header().Set("Access-Control-Allow-Headers", value)
-	}
-
-	if r.Header.Get("Access-Control-Request-Method") != "" {
-		w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT")
-	}
-
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("License", "Anyone may do anything with this.")
-	w.Header().Set("Warranty", `"AS IS" WITH NO WARRANTY OF ANY KIND EXPRESS OR IMPLIED.`)
-	w.Header().Set("Access-Control-Max-Age", "1728000")
 	w.Header().Set("Content-Type", response.mimetype)
 
 	if response.to != "" {

@@ -100,7 +100,7 @@ func Template(status StatusCode, path string, data interface{}) {
 	HTML(status, b.String())
 }
 
-func OK(r *http.Request) {
+func OK() {
 	statusResponse("OK", http.StatusOK)
 }
 
